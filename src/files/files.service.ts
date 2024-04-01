@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateFilessDto } from './dto/create-files.dto';
-import { UpdateFilessDto } from './dto/update-files.dto';
+import { CreateFilesDto } from './dto/create-files.dto';
+import { UpdateFilesDto } from './dto/update-files.dto';
 
 @Injectable()
-export class FilessService {
-  create(createFilessDto: CreateFilessDto) {
+export class FilesService {
+  create(createFilesDto: CreateFilesDto) {
     return 'This action adds a new files';
   }
 
@@ -16,7 +16,7 @@ export class FilessService {
     return `This action returns a #${id} files`;
   }
 
-  update(id: number, updateFilessDto: UpdateFilessDto) {
+  update(id: number, updateFilesDto: UpdateFilesDto) {
     return `This action updates a #${id} files`;
   }
 

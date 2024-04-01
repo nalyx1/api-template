@@ -7,38 +7,38 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { FilessService } from './files.service';
-import { CreateFilessDto } from './dto/create-files.dto';
-import { UpdateFilessDto } from './dto/update-files.dto';
+import { FilesService } from './files.service';
+import { CreateFilesDto } from './dto/create-files.dto';
+import { UpdateFilesDto } from './dto/update-files.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('files')
 @Controller('files')
-export class FilessController {
-  constructor(private readonly filessService: FilessService) {}
+export class FilesController {
+  constructor(private readonly filesService: FilesService) {}
 
   @Post()
-  create(@Body() createFilessDto: CreateFilessDto) {
-    return this.filessService.create(createFilessDto);
+  create(@Body() createFilesDto: CreateFilesDto) {
+    return this.filesService.create(createFilesDto);
   }
 
   @Get()
   findAll() {
-    return this.filessService.findAll();
+    return this.filesService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.filessService.findOne(+id);
+    return this.filesService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFilessDto: UpdateFilessDto) {
-    return this.filessService.update(+id, updateFilessDto);
+  update(@Param('id') id: string, @Body() updateFilesDto: UpdateFilesDto) {
+    return this.filesService.update(+id, updateFilesDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.filessService.remove(+id);
+    return this.filesService.remove(+id);
   }
 }
