@@ -1,0 +1,40 @@
+version: '3'
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge
+
+services:
+  db:
+    container_name: db
+    image: postgres
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+
+  app:
+    container_name: app
+    build: .
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.typebot-viewer.rule=Host(`api.viralizou.xyz`)'
+      - 'traefik.http.routers.typebot-viewer.entrypoints=web,websecure'
+      - 'traefik.http.routers.typebot-viewer.tls.certresolver=leresolver'
+    networks:
+      - app-network
+    depends_on:
+      - db
